@@ -20,8 +20,13 @@
       /* border: 3px solid black; */
       display: grid;
       display: grid;
-      grid-template-columns: 400px minmax(300px, 500px);
+      grid-template-columns: 200px 200px auto;
       grid-template-rows: 200px 200px minmax(100px, 300px);
+      grid-auto-columns: 200px;
+      grid-template-areas:
+        "logo logo input"
+        "logo logo output"
+        "allurls allurls allurls";
       grid-gap: 20px;
       justify-content: center;
       align-content: center;
@@ -33,17 +38,21 @@
     }
 
     .logo {
-      display: grid;
-      grid-row: span 2;
-      background: green;
+      grid-area: logo;
+      /* display: grid; */
       background-image: url("img/bg.jpg");
-      align-items: center;
-      justify-items: center;
-      background-size: cover;
       background-repeat: no-repeat;
+      background-size: cover;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      text-align: center;
     }
 
     .logo__text {
+      justify-self: center;
+      align-self: center;
       font-size: 50px;
       text-transform: uppercase;
       font-weight: 300;
@@ -51,22 +60,42 @@
       padding: 15px;
     }
 
-    .input-url-box {}
+    .input-url-box {
+      width: 400px;
+      grid-area: input;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      text-align: center;
+    }
 
-    .output-url-box {}
+    .output-url-box {
+      grid-area: output;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      text-align: center;
+    }
 
     .all-urls {
-      grid-column: span 2;
+      grid-area: allurls;
       overflow-y: scroll;
 
     }
 
-@media (max-width: 768) {
-  .main {
-    grid-template-columns: auto;
-  }
+    @media (max-width: 768px) {
+      .main {
+        grid-template-columns: auto;
+        grid-template-areas:
+        "logo"
+        "input"
+        "output"
+        "allurls";
+      }
 
-}
+    }
   </style>
 </head>
 
