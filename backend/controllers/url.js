@@ -6,8 +6,10 @@ const shortid = require("shortid");
 
 module.exports = {
   getShortenUrl: async (req, res) => {
-      console.log('wjezdzam tu')
       const urlCode = req.params.shortenUrl;
+      if (urlCode === 'favicon.ico') {
+        return;
+      }
       const item = await UrlModel.findOne({
         urlCode: urlCode
       });
