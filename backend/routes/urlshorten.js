@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const validUrl = require("valid-url");
-const UrlShorten = mongoose.model("UrlShorten");
+const UrlModel = mongoose.model("UrlModel");
 const shortid = require("shortid");
 const errorUrl = 'http://localhost/error';
+const UrlControler = require('../controllers/url')
 module.exports = app => {
   app.post("/", async (req, res) => {
     const {
@@ -20,14 +21,14 @@ module.exports = app => {
         );
     } else {
       try {
-        const item = await UrlShorten.findOne({
+        const item = await UrlModel.findOne({
           originalUrl: originalUrl
         });
         if (item) {
           res.status(200).json(item);
         } else {
           shortUrl = shortBaseUrl + "/" + urlCode;
-          const item = new UrlShorten({
+          const item = new UrlModel({
             originalUrl,
             shortUrl,
             urlCode,
@@ -42,14 +43,6 @@ module.exports = app => {
     }
   });
   app.get("/:shortenUrl", async (req, res) => {
-    const urlCode = req.params.shortenUrl;
-    const item = await UrlShorten.findOne({
-      urlCode: urlCode
-    });
-    if (item) {
-      return res.redirect(item.originalUrl);
-    } else {
-      return res.redirect(errorUrl);
-    }
+    return UrlControler.getShorten(req,res)
   })
 };
