@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const mongoURI = "mongodb://localhost/url-shortner";
+require('./models/url')
 const connectOptions = {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE,
@@ -19,3 +20,4 @@ const PORT = 7000;
 app.listen(PORT, () => {
   console.log(`Server started on port`, PORT);
 });
+require("./routes/urlshorten")(app);
