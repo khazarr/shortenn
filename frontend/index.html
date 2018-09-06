@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Shorten Url</title>
+  <style>
+    body {
+      box-sizing: border-box;
+      background: rgba(0, 0, 0, 0.02);
+      color: #0e0e0e;
+      font-family: 'Courier New', Courier, monospace;
+
+    }
+
+    .main {
+      height: calc(100vh - 80px);
+      /* border: 3px solid black; */
+      display: grid;
+      display: grid;
+      grid-template-columns: 400px minmax(300px, 500px);
+      grid-template-rows: 200px 200px minmax(100px, 300px);
+      grid-gap: 20px;
+      justify-content: center;
+      align-content: center;
+    }
+
+    .main>* {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      /* border: 1px solid rgba(0, 0, 0, 0.4) */
+    }
+
+    .logo {
+      display: grid;
+      grid-row: span 2;
+      background: green;
+      background-image: url("img/bg.jpg");
+      align-items: center;
+      justify-items: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .logo__text {
+      font-size: 50px;
+      text-transform: uppercase;
+      font-weight: 300;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 15px;
+    }
+
+    .input-url-box {}
+
+    .output-url-box {}
+
+    .all-urls {
+      grid-column: span 2;
+      overflow-y: scroll;
+
+    }
+
+@media (max-width: 768) {
+  .main {
+    grid-template-columns: auto;
+  }
+
+}
+  </style>
+</head>
+
+<body>
+  <section class="main">
+    <div class="logo">
+      <div class="logo__text">
+        Shorten it
+      </div>
+    </div>
+    <div class="input-url-box">input-url-box</div>
+    <div class="output-url-box">output-url-box</div>
+    <div class="all-urls">
+      <ul>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+        <li>halko</li>
+      </ul>
+  </section>
+</body>
+
+</html>
