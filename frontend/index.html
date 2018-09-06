@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300" rel="stylesheet">
   <title>Shorten Url</title>
   <style>
     body {
       box-sizing: border-box;
-      background: rgba(0, 0, 0, 0.02);
+      background: linear-gradient(to right, #2f4858, #f2fcfe);
       color: #0e0e0e;
-      font-family: 'Courier New', Courier, monospace;
-
+      font-family: 'Montserrat', sans-serif;
     }
 
     .main {
@@ -20,26 +20,28 @@
       /* border: 3px solid black; */
       display: grid;
       display: grid;
-      grid-template-columns: 200px 200px auto;
-      grid-template-rows: 200px 200px minmax(100px, 300px);
+      grid-template-columns: 400px minmax(400px, auto);
+      /* grid-template-rows: 300px minmax(100px, 300px); */
+      grid-template-rows: 300px 50px;
       grid-auto-columns: 200px;
       grid-template-areas:
-        "logo logo input"
-        "logo logo output"
-        "allurls allurls allurls";
+        "logo input-output"
+        "allurls allurls";
       grid-gap: 20px;
       justify-content: center;
       align-content: center;
+      margin: 30px 0;
     }
 
     .main>* {
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      background: rgba(255,255,255,0.2)
       /* border: 1px solid rgba(0, 0, 0, 0.4) */
     }
 
     .logo {
       grid-area: logo;
-      /* display: grid; */
+      display: grid;
       background-image: url("img/bg.jpg");
       background-repeat: no-repeat;
       background-size: cover;
@@ -55,13 +57,16 @@
       align-self: center;
       font-size: 50px;
       text-transform: uppercase;
-      font-weight: 300;
+      font-weight: 3 00;
       background: rgba(255, 255, 255, 0.5);
       padding: 15px;
     }
 
+    .interface-wrapper {
+      grid-area: input-output;
+      display: grid;
+    }
     .input-url-box {
-      width: 400px;
       grid-area: input;
       display: grid;
       align-items: center;
@@ -69,6 +74,61 @@
       align-content: center;
       text-align: center;
     }
+
+.interface {
+  display: grid;
+  justify-content: stretch;
+  align-content: center;
+  text-align: center;
+  grid-gap: 20px;
+}
+.interface:hover .interface__header {
+  transition: all 0.5s;
+  opacity: 1;
+}
+
+.interface:hover .interface__button {
+  opacity: 1;
+transition: all 0.5s;
+}
+
+.interface__header {
+  border-bottom: 5px solid #f6ae2d ;
+  font-weight: 900;
+  text-transform: capitalize;
+  font-style: italic;
+  font-size: 30px;
+  justify-self: center;
+  transition: all 0.5s;
+  /* border-bottom: 0.2px solid #f6ae2d ; */
+opacity: 0;
+}
+
+
+.interface__input {
+  width: 75%;
+  justify-self: center;
+  padding: 10px;
+}
+
+.interface__button {
+  opacity: 0;
+transition: all 0.2s;
+  text-transform: uppercase;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  /* border: 1px solid #0e0e0e; */
+  /* background: rgba(211, 172, 52, 0.5); */
+  /* color: #fff; */
+
+/* background: #33658a; */
+background: #f6ae2d;
+  font-weight: 400;
+  padding: 10px;
+  font-size: 20px;
+  width: 75%;
+  justify-self: center;
+  cursor: pointer;
+}
 
     .output-url-box {
       grid-area: output;
@@ -82,18 +142,42 @@
     .all-urls {
       grid-area: allurls;
       overflow-y: scroll;
-
+      display: grid;
     }
 
+.all-urls__button {
+  justify-self: center;
+  align-self: center;
+}
+
     @media (max-width: 768px) {
-      .main {
-        grid-template-columns: auto;
-        grid-template-areas:
-        "logo"
-        "input"
-        "output"
-        "allurls";
+      body {
+        margin: 0;
       }
+      .main {
+        margin: 0;
+        padding: 40px 20px;
+        grid-template-columns: auto;
+        grid-template-rows: 200px;
+        height: auto;
+        justify-content: normal;
+        grid-template-areas:
+          "logo"
+          "input-output"
+          "allurls";
+      }
+
+.logo__text {
+  font-size: 30px;
+}
+.interface {
+  padding: 20px;
+}
+
+.interface__header {
+  font-size: 22px;
+}
+
 
     }
   </style>
@@ -106,10 +190,19 @@
         Shorten it
       </div>
     </div>
-    <div class="input-url-box">input-url-box</div>
-    <div class="output-url-box">output-url-box</div>
+    <div class="interface-wrapper">
+      <div class="interface">
+        <div class="interface__header">
+          <span class="interface__header__detail">Simplify</span> your link
+        </div>
+        <input placeholder="Provide url" type="text" class="interface__input">
+        <div class="interface__button">go</div>
+        <!-- <div class="interface__ouput">www.elo.pl</div> -->
+      </div>
+    </div>
     <div class="all-urls">
-      <ul>
+      <div class="all-urls__button">See history</div>
+      <!-- <ul>
         <li>halko</li>
         <li>halko</li>
         <li>halko</li>
@@ -131,7 +224,8 @@
         <li>halko</li>
         <li>halko</li>
         <li>halko</li>
-      </ul>
+      </ul> -->
+    </div>
   </section>
 </body>
 
