@@ -20,14 +20,14 @@
       /* border: 3px solid black; */
       display: grid;
       display: grid;
-      grid-template-columns: 400px minmax(400px, auto);
+      grid-template-columns: 500px minmax(300px, auto);
       /* grid-template-rows: 300px minmax(100px, 300px); */
-      grid-template-rows: 300px 50px;
+      grid-template-rows: 300px;
       grid-auto-columns: 200px;
       grid-template-areas:
         "logo input-output"
         "allurls allurls";
-      grid-gap: 20px;
+      /* grid-gap: 20px; */
       justify-content: center;
       align-content: center;
       margin: 30px 0;
@@ -42,7 +42,7 @@
     .logo {
       grid-area: logo;
       display: grid;
-      background-image: url("img/bg.jpg");
+      background-image: url("/bg.jpg");
       background-repeat: no-repeat;
       background-size: cover;
       display: grid;
@@ -57,7 +57,7 @@
       align-self: center;
       font-size: 50px;
       text-transform: uppercase;
-      font-weight: 3 00;
+      font-weight: 800;
       background: rgba(255, 255, 255, 0.5);
       padding: 15px;
     }
@@ -100,8 +100,7 @@ transition: all 0.5s;
   font-size: 30px;
   justify-self: center;
   transition: all 0.5s;
-  /* border-bottom: 0.2px solid #f6ae2d ; */
-opacity: 0;
+/* opacity: 0; */
 }
 
 
@@ -109,22 +108,22 @@ opacity: 0;
   width: 75%;
   justify-self: center;
   padding: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .interface__button {
-  opacity: 0;
 transition: all 0.2s;
   text-transform: uppercase;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  /* border: 1px solid #0e0e0e; */
-  /* background: rgba(211, 172, 52, 0.5); */
-  /* color: #fff; */
-
-/* background: #33658a; */
-background: #f6ae2d;
-  font-weight: 400;
-  padding: 10px;
-  font-size: 20px;
+background: rgba(255, 255, 255, 0.2);
+/* border: 2px solid #f2fcfe; */
+border: 1px solid #0e0e0e;
+color: #0e0e0e;
+font-weight: 900;
+font-size: 20px;
+  padding: 8px;
   width: 75%;
   justify-self: center;
   cursor: pointer;
@@ -145,9 +144,22 @@ background: #f6ae2d;
       display: grid;
     }
 
+    .error {
+      text-decoration: none;
+      color: #0E0E0E;
+      FONT-WEIGHT: 900;
+    }
+
 .all-urls__button {
   justify-self: center;
   align-self: center;
+}
+
+.fotter {
+  text-decoration: none;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
 }
 
     @media (max-width: 768px) {
@@ -158,8 +170,8 @@ background: #f6ae2d;
         margin: 0;
         padding: 40px 20px;
         grid-template-columns: auto;
-        grid-template-rows: 200px;
-        height: auto;
+        /* grid-template-rows: 2f; */
+        /* height: auto; */
         justify-content: normal;
         grid-template-areas:
           "logo"
@@ -187,46 +199,63 @@ background: #f6ae2d;
   <section class="main">
     <div class="logo">
       <div class="logo__text">
-        Shorten it
+        Shorten url
       </div>
     </div>
     <div class="interface-wrapper">
       <div class="interface">
-        <div class="interface__header">
-          <span class="interface__header__detail">Simplify</span> your link
-        </div>
-        <input placeholder="Provide url" type="text" class="interface__input">
+        <input placeholder="http://www.example.com" type="text" class="interface__input">
         <div class="interface__button">go</div>
-        <!-- <div class="interface__ouput">www.elo.pl</div> -->
+        <a rel="noreferrer" rel="noopener" target="_blank" href="#" class="interface__ouput"></a>
       </div>
     </div>
-    <div class="all-urls">
-      <div class="all-urls__button">See history</div>
-      <!-- <ul>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-        <li>halko</li>
-      </ul> -->
-    </div>
+
   </section>
+<a href="https://github.com/khazarr" class="fotter">Khazarr © 2018</a>
+  <script>
+    const button = document.querySelector('.interface__button');
+    const input = document.querySelector('.interface__input');
+    const output = document.querySelector('.interface__ouput');
+
+    button.addEventListener('click', () => {
+      const originalUrl = input.value
+      if (originalUrl) {
+        fetch('http://localhost:7000', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              originalUrl,
+              shortBaseUrl: "http://localhost:7000"
+            })
+          })
+          .then(resp => {
+            return resp.json()
+          })
+          .then(jsonResponse => {
+            console.log(jsonResponse)
+            if (jsonResponse.err) {
+              output.classList.add('error')
+              output.href = '#'
+              output.innerHTML = `error: ${jsonResponse.msg}`
+            } else {
+              // prod
+              // const outputUrl = `${window.location.origin}/${jsonResponse.urlCode}`
+              // test
+              output.classList.remove('error')
+              const outputUrl = `${jsonResponse.shortUrl}`
+              output.href = outputUrl
+              output.innerHTML = outputUrl
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
+    })
+  </script>
 </body>
 
 </html>

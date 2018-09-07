@@ -25,7 +25,7 @@ module.exports = {
         originalUrl,
         shortBaseUrl
       } = req.body;
-      const urlCode = shorid.generate();
+      const urlCode = shortid.generate();
       const updatedAt = new Date();
       const validation = helpers.validateParameters(originalUrl, shortBaseUrl)
       if (!validation.status) {

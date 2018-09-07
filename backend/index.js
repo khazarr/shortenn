@@ -2,8 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const mongoURI = "mongodb://localhost/url-shortner";
+const path = require('path');
 const PORT = process.env.port || 7000;
 const app = express();
+
 
 
 //Connect to MongoDB 
@@ -21,6 +23,12 @@ mongoose.connect(mongoURI, connectOptions, (err, db) => {
 
 require('./models/url')
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.listen(PORT, () => {
   console.log(`Server started on port`, PORT);
 });
