@@ -11,6 +11,6 @@ module.exports = app => {
     return UrlControler.getShortenUrl(req, res)
   })
   app.get("/", (req, res) => {
-    return res.sendFile(path.join(__dirname, '../../frontend/index.html'))
+    return res.sendFile(path.join(__dirname, '../view/index.html'))
   })
 };
