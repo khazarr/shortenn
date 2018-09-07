@@ -22,6 +22,8 @@ mongoose.connect(mongoURI, connectOptions, (err, db) => {
 
 
 require('./models/url')
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 app.use(function (req, res, next) {

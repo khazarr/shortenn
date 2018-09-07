@@ -11,6 +11,10 @@ module.exports = app => {
     return UrlControler.getShortenUrl(req, res)
   })
   app.get("/", (req, res) => {
-    return res.sendFile(path.join(__dirname, '../view/index.html'))
+    // return res.sendFile(path.join(__dirname, '../view/index.html'))
+    return res.render(path.join(__dirname, '../view/index'), {
+      port: process.env.PORT || '7000'
+    })
+
   })
 };

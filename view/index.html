@@ -199,13 +199,15 @@ font-size: 20px;
   <section class="main">
     <div class="logo">
       <div class="logo__text">
-        Shorten url
+        Shorten URL
       </div>
     </div>
     <div class="interface-wrapper">
       <div class="interface">
         <input placeholder="http://www.example.com" type="text" class="interface__input">
-        <div class="interface__button">go</div>
+<div class="interface__button">go
+
+</div>
         <a rel="noreferrer" rel="noopener" target="_blank" href="#" class="interface__ouput"></a>
       </div>
     </div>
@@ -216,11 +218,12 @@ font-size: 20px;
     const button = document.querySelector('.interface__button');
     const input = document.querySelector('.interface__input');
     const output = document.querySelector('.interface__ouput');
-
+    const port = '<%= port %>';
+  console.log(`port :${port}`)
     button.addEventListener('click', () => {
       const originalUrl = input.value
       if (originalUrl) {
-        fetch('http://localhost:7000', {
+        fetch(`http://localhost:${port}`, {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -242,10 +245,10 @@ font-size: 20px;
               output.innerHTML = `error: ${jsonResponse.msg}`
             } else {
               // prod
-              // const outputUrl = `${window.location.origin}/${jsonResponse.urlCode}`
+              const outputUrl = `${window.location.origin}/${jsonResponse.urlCode}`
               // test
+              // const outputUrl = `${jsonResponse.shortUrl}`
               output.classList.remove('error')
-              const outputUrl = `${jsonResponse.shortUrl}`
               output.href = outputUrl
               output.innerHTML = outputUrl
             }
