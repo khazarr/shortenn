@@ -219,11 +219,10 @@ font-size: 20px;
     const input = document.querySelector('.interface__input');
     const output = document.querySelector('.interface__ouput');
     const port = '<%= port %>';
-  console.log(`port :${port}`)
     button.addEventListener('click', () => {
       const originalUrl = input.value
       if (originalUrl) {
-        fetch(`http://localhost:${port}`, {
+        fetch(window.location.origin, {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
