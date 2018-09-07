@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const mongoURI = "mongodb://localhost/url-shortner";
+const mongoURI = process.env.MONGODB_URI || "mongodb://localhost/url-shortner";
 const path = require('path');
 const PORT = process.env.port || 7000;
 const app = express();
